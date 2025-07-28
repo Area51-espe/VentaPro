@@ -1,0 +1,65 @@
+### Visual Studio ###
+## Archivos generados por el IDE ##
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vsp
+*.vssscc
+*.vspscc
+
+## Archivos de compilación ##
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rd]elease/
+x64/
+x86/
+*.cache
+*.pdb
+*.dll
+*.exe
+*.lib
+*.obj
+*.ilk
+*.log
+*.tlb
+*.tlh
+*.tmp
+*.bak
+*.old
+*.sdf
+
+## NuGet ##
+packages/
+.nuget/
+*.nupkg
+
+## Resharper ##
+_ReSharper*/
+*.DotSettings
+
+## NCrunch ##
+.NCrunch*
+*.ncrunch*
+
+## Rider / IntelliJ ##
+.idea/
+
+## VS Code ##
+.vscode/
+
+## Archivos de pruebas ##
+TestResults/
+*.testsettings
+*.webtest
+*.loadtest
+
+## Git ##
+.git/
+
+## Archivos temporales ##
+Thumbs.db
+Desktop.ini
+*.DS_Store
