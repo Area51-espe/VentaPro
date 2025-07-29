@@ -16,7 +16,7 @@
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -56,7 +56,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\IUserRepository.cs" />
-    <Compile Include="Models\Notificacion.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
@@ -115,6 +114,12 @@
     <Resource Include="Images\permiso.png" />
     <Resource Include="Images\tarjeta-electronica.png" />
     <Resource Include="Images\usuario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\seguro.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logo %282%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
