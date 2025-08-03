@@ -2,6 +2,8 @@
 using System.Windows.Controls; // Crucial for PasswordBox
 using System.Windows.Input; // For MouseButtonEventArgs
 using VentaPro.VistaModelo; // Assuming your ViewModel is in this namespace
+using System.ComponentModel;
+using System.Windows.Input;
 
 namespace VentaPro.View
 {

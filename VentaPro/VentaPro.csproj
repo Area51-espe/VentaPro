@@ -46,6 +46,10 @@
       <HintPath>..\packages\iTextSharp.5.5.13.4\lib\net461\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=9.0.0.7, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.9.0.7\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -70,6 +74,9 @@
     <Compile Include="Comprobante\ComprobanteReportes.cs" />
     <Compile Include="Comprobante\ComprobanteVenta.cs" />
     <Compile Include="Comprobante\DetalleComprobantePDF.cs" />
+    <Compile Include="CustomControls\BindablePasswordBox.xaml.cs">
+      <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\ClienteModel.cs" />
     <Compile Include="Models\CompraModel.cs" />
     <Compile Include="Models\DetalleCompraModel.cs" />
@@ -138,6 +145,10 @@
     <Compile Include="VistaModelo\StockViewModel.cs" />
     <Compile Include="VistaModelo\ViewModelBase.cs" />
     <Compile Include="VistaModelo\ViewModelCommand.cs" />
+    <Page Include="CustomControls\BindablePasswordBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -150,6 +161,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Styles\ButtonStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Styles\UIColors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\AgregarClienteView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -211,23 +230,6 @@
     <Content Include="Content\svg-with-js.min.css" />
     <Content Include="Content\v4-shims.css" />
     <Content Include="Content\v4-shims.min.css" />
-    <Content Include="Scripts\fontawesome\all.js" />
-    <Content Include="Scripts\fontawesome\all.min.js" />
-    <Content Include="Scripts\fontawesome\brands.js" />
-    <Content Include="Scripts\fontawesome\brands.min.js" />
-    <Content Include="Scripts\fontawesome\conflict-detection.js" />
-    <Content Include="Scripts\fontawesome\conflict-detection.min.js" />
-    <Content Include="Scripts\fontawesome\fontawesome.js" />
-    <Content Include="Scripts\fontawesome\fontawesome.min.js" />
-    <Content Include="Scripts\fontawesome\regular.js" />
-    <Content Include="Scripts\fontawesome\regular.min.js" />
-    <Content Include="Scripts\fontawesome\solid.js" />
-    <Content Include="Scripts\fontawesome\solid.min.js" />
-    <Content Include="Scripts\fontawesome\v4-shims.js" />
-    <Content Include="Scripts\fontawesome\v4-shims.min.js" />
-    <Content Include="webfonts\fa-brands-400.svg" />
-    <Content Include="webfonts\fa-regular-400.svg" />
-    <Content Include="webfonts\fa-solid-900.svg" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -237,18 +239,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Resource Include="webfonts\fa-solid-900.ttf" />
-    <Resource Include="webfonts\fa-regular-400.ttf" />
-    <Resource Include="webfonts\fa-brands-400.ttf" />
-    <None Include="webfonts\fa-brands-400.eot" />
-    <None Include="webfonts\fa-brands-400.woff" />
-    <None Include="webfonts\fa-brands-400.woff2" />
-    <None Include="webfonts\fa-regular-400.eot" />
-    <None Include="webfonts\fa-regular-400.woff" />
-    <None Include="webfonts\fa-regular-400.woff2" />
-    <None Include="webfonts\fa-solid-900.eot" />
-    <None Include="webfonts\fa-solid-900.woff" />
-    <None Include="webfonts\fa-solid-900.woff2" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

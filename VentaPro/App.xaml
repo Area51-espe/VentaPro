@@ -3,7 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:VentaPro"
              StartupUri="View/Login.xaml">
+
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- 1. Colores base -->
+                <ResourceDictionary Source="/Styles/UIColors.xaml"/>
+
+                <!-- 3. Estilos de botones -->
+                <ResourceDictionary Source="/Styles/ButtonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+
+        </ResourceDictionary>
+
+
+        <!--#region -->
+
+
+
+
     </Application.Resources>
+
 </Application>
