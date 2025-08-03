@@ -8,5 +8,12 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
 
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="MenuColumn" Width="250"/>
+            <!-- Esto es lo importante -->
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
     </Grid>
 </Window>
