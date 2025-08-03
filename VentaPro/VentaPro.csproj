@@ -70,6 +70,9 @@
     <Compile Include="Comprobante\ComprobanteReportes.cs" />
     <Compile Include="Comprobante\ComprobanteVenta.cs" />
     <Compile Include="Comprobante\DetalleComprobantePDF.cs" />
+    <Compile Include="CustomControls\BindablePasswordBox.xaml.cs">
+      <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\ClienteModel.cs" />
     <Compile Include="Models\CompraModel.cs" />
     <Compile Include="Models\DetalleCompraModel.cs" />
@@ -138,6 +141,10 @@
     <Compile Include="VistaModelo\StockViewModel.cs" />
     <Compile Include="VistaModelo\ViewModelBase.cs" />
     <Compile Include="VistaModelo\ViewModelCommand.cs" />
+    <Page Include="CustomControls\BindablePasswordBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

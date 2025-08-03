@@ -3,17 +3,99 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:VentaPro"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:vm="clr-namespace:VentaPro.VistaModelo"
+        xmlns:local="clr-namespace:VentaPro.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="VentaPro" Height="650" Width="1200"
+        ResizeMode="CanResize"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True">
 
+    <Window.DataContext>
+        <vm:MainViewModel />
+    </Window.DataContext>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="MenuColumn" Width="250"/>
-            <!-- Esto es lo importante -->
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <Window.Resources>
+        <SolidColorBrush x:Key="MenuBackground" Color="#333333"/>
+        <SolidColorBrush x:Key="ContentBackground" Color="#2c3e50"/>
+        <SolidColorBrush x:Key="TextColor" Color="White"/>
 
-    </Grid>
+        <DataTemplate DataType="{x:Type vm:HomeViewModel}">
+            <local:HomeView/>
+        </DataTemplate>
+       
+        <DataTemplate DataType="{x:Type vm:ProveedoresViewModel}">
+            <local:ProvedoresView/>
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type vm:ClientesViewModel}">
+            <local:ClientesView/>
+        </DataTemplate>
+        
+        
+        
+        
+        
+    </Window.Resources>
+
+    <Border CornerRadius="10" BorderThickness="1" Padding="5">
+        <Border CornerRadius="10" BorderThickness="1">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#2c3e50" Offset="0"/>
+                    <GradientStop Color="#333333" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250" x:Name="MenuColumn"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Background="{StaticResource MenuBackground}">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="35" Margin="15,25,0,40">
+                            <Image Source="/Images/tarjeta-electronica.png" Height="30" Width="30"/>
+                            <TextBlock Text="VENTAPRO" Foreground="White" FontSize="20" Margin="10,0,0,0"/>
+                        </StackPanel>
+
+                        <TextBlock Text="PRINCIPAL" Margin="45,0,0,0" Foreground="White" FontSize="12"/>
+
+                        <RadioButton Content="Dashboard" Margin="20 10" Command="{Binding ShowHomeViewCommand}"/>
+                        <!-- Agrega más botones según sea necesario -->
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" Background="{StaticResource ContentBackground}" CornerRadius="0,10,10,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel x:Name="pnlControlBar" Grid.Row="0" Orientation="Horizontal" FlowDirection="RightToLeft" Margin="0,0,5,0">
+                            <Button x:Name="btnClose" Content="X" Click="btnClose_Click"/>
+                            <Button x:Name="btnMaximize" Content="⬜" Click="btnMaximize_Click"/>
+                            <Button x:Name="btnMinimize" Content="_" Click="btnMinimize_Click"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0">
+                            <fa:IconImage Icon="Home" Height="20" Width="20" Foreground="White" Margin="10,0,10,0"/>
+                            <TextBlock Text="Inicio" Foreground="White" FontSize="16"/>
+                        </StackPanel>
+
+                        <ContentControl Grid.Row="2" Content="{Binding CurrentChildView}" Margin="20"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </Border>
 </Window>
