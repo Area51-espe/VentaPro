@@ -8,12 +8,13 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>VentaPro</RootNamespace>
     <AssemblyName>VentaPro</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>x64</PlatformTarget>
@@ -35,8 +36,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.Cryptography.2.4.0\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="FontAwesome.Sharp, Version=6.6.0.0, Culture=neutral, PublicKeyToken=d16d1e4e568ec10f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.Sharp.6.6.0\lib\net48\FontAwesome.Sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.4, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.4\lib\net461\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,14 +67,75 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Comprobante\ComprobanteReportes.cs" />
+    <Compile Include="Comprobante\ComprobanteVenta.cs" />
+    <Compile Include="Comprobante\DetalleComprobantePDF.cs" />
+    <Compile Include="Models\ClienteModel.cs" />
+    <Compile Include="Models\CompraModel.cs" />
+    <Compile Include="Models\DetalleCompraModel.cs" />
+    <Compile Include="Models\DetalleVentaModel.cs" />
+    <Compile Include="Models\IClienteRepository.cs" />
+    <Compile Include="Models\ICompraRepository.cs" />
+    <Compile Include="Models\IDetalleCompraRepository.cs" />
+    <Compile Include="Models\IDetalleVentaRepository.cs" />
+    <Compile Include="Models\IProductoRepository.cs" />
+    <Compile Include="Models\IProveedorRepository.cs" />
+    <Compile Include="Models\IStockRepository.cs" />
     <Compile Include="Models\IUserRepository.cs" />
+    <Compile Include="Models\IVentaRepository.cs" />
+    <Compile Include="Models\Notificacion.cs" />
+    <Compile Include="Models\ProductoModel.cs" />
+    <Compile Include="Models\ProveedorModel.cs" />
+    <Compile Include="Models\ReporteModel.cs" />
+    <Compile Include="Models\StockModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\VentaModel.cs" />
+    <Compile Include="Repositories\ClienteRepository.cs" />
+    <Compile Include="Repositories\CompraRepository.cs" />
+    <Compile Include="Repositories\DetalleCompraRepository.cs" />
+    <Compile Include="Repositories\DetalleVentaRepository.cs" />
+    <Compile Include="Repositories\ProductoRepository.cs" />
+    <Compile Include="Repositories\ProveedorRepository.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
+    <Compile Include="Repositories\StockRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Repositories\VentaRepository.cs" />
+    <Compile Include="View\AgregarClienteView.xaml.cs">
+      <DependentUpon>AgregarClienteView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AgregarProductoView.xaml.cs">
+      <DependentUpon>AgregarProductoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AgregarProveedorView.xaml.cs">
+      <DependentUpon>AgregarProveedorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ClientesView.xaml.cs">
+      <DependentUpon>ClientesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\HomeView.xaml.cs">
+      <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ProvedoresView.xaml.cs">
+      <DependentUpon>ProvedoresView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VentasView.xaml.cs">
+      <DependentUpon>VentasView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="VistaModelo\AgregarClienteViewModel.cs" />
+    <Compile Include="VistaModelo\AgregarProductoViewModel.cs" />
+    <Compile Include="VistaModelo\AgregarProveedorViewModel.cs" />
+    <Compile Include="VistaModelo\ClientesViewModel.cs" />
+    <Compile Include="VistaModelo\FinanzasViewModel.cs" />
+    <Compile Include="VistaModelo\HomeViewModel.cs" />
     <Compile Include="VistaModelo\LoginViewModel.cs" />
+    <Compile Include="VistaModelo\MainViewModel.cs" />
+    <Compile Include="VistaModelo\ProductosViewModel.cs" />
+    <Compile Include="VistaModelo\ProveedoresViewModel.cs" />
+    <Compile Include="VistaModelo\ReportesViewModel.cs" />
+    <Compile Include="VistaModelo\StockViewModel.cs" />
     <Compile Include="VistaModelo\ViewModelBase.cs" />
     <Compile Include="VistaModelo\ViewModelCommand.cs" />
     <Page Include="MainWindow.xaml">
@@ -77,7 +150,35 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AgregarClienteView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AgregarProductoView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AgregarProveedorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ClientesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\HomeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Login.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ProvedoresView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\VentasView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -96,14 +197,58 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Content Include="Content\all.css" />
+    <Content Include="Content\all.min.css" />
+    <Content Include="Content\brands.css" />
+    <Content Include="Content\brands.min.css" />
+    <Content Include="Content\fontawesome.css" />
+    <Content Include="Content\fontawesome.min.css" />
+    <Content Include="Content\regular.css" />
+    <Content Include="Content\regular.min.css" />
+    <Content Include="Content\solid.css" />
+    <Content Include="Content\solid.min.css" />
+    <Content Include="Content\svg-with-js.css" />
+    <Content Include="Content\svg-with-js.min.css" />
+    <Content Include="Content\v4-shims.css" />
+    <Content Include="Content\v4-shims.min.css" />
+    <Content Include="Scripts\fontawesome\all.js" />
+    <Content Include="Scripts\fontawesome\all.min.js" />
+    <Content Include="Scripts\fontawesome\brands.js" />
+    <Content Include="Scripts\fontawesome\brands.min.js" />
+    <Content Include="Scripts\fontawesome\conflict-detection.js" />
+    <Content Include="Scripts\fontawesome\conflict-detection.min.js" />
+    <Content Include="Scripts\fontawesome\fontawesome.js" />
+    <Content Include="Scripts\fontawesome\fontawesome.min.js" />
+    <Content Include="Scripts\fontawesome\regular.js" />
+    <Content Include="Scripts\fontawesome\regular.min.js" />
+    <Content Include="Scripts\fontawesome\solid.js" />
+    <Content Include="Scripts\fontawesome\solid.min.js" />
+    <Content Include="Scripts\fontawesome\v4-shims.js" />
+    <Content Include="Scripts\fontawesome\v4-shims.min.js" />
+    <Content Include="webfonts\fa-brands-400.svg" />
+    <Content Include="webfonts\fa-regular-400.svg" />
+    <Content Include="webfonts\fa-solid-900.svg" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="webfonts\fa-solid-900.ttf" />
+    <Resource Include="webfonts\fa-regular-400.ttf" />
+    <Resource Include="webfonts\fa-brands-400.ttf" />
+    <None Include="webfonts\fa-brands-400.eot" />
+    <None Include="webfonts\fa-brands-400.woff" />
+    <None Include="webfonts\fa-brands-400.woff2" />
+    <None Include="webfonts\fa-regular-400.eot" />
+    <None Include="webfonts\fa-regular-400.woff" />
+    <None Include="webfonts\fa-regular-400.woff2" />
+    <None Include="webfonts\fa-solid-900.eot" />
+    <None Include="webfonts\fa-solid-900.woff" />
+    <None Include="webfonts\fa-solid-900.woff2" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -121,5 +266,6 @@
   <ItemGroup>
     <Resource Include="Images\logo %282%29.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

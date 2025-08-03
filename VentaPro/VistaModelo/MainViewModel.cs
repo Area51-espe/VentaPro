@@ -1,0 +1,107 @@
+﻿using FontAwesome.Sharp;
+using System.Windows.Input;
+
+namespace VentaPro.VistaModelo
+{
+    public class MainViewModel : ViewModelBase
+    {
+        private ViewModelBase _currentChildView;
+        private string _caption;
+        private IconChar _icon;
+
+        public ViewModelBase CurrentChildView { get => _currentChildView; set { _currentChildView = value; OnPropertyChanged(nameof(CurrentChildView)); } }
+        public string Caption { get => _caption; set { _caption = value; OnPropertyChanged(nameof(Caption)); } }
+        public IconChar Icon { get => _icon; set { _icon = value; OnPropertyChanged(nameof(Icon)); } }
+
+
+        //Command
+        public ICommand ShowHomeViewCommand { get; }
+        public ICommand ShowVentasViewCommand { get; }
+        public ICommand ShowProvedoresViewCommand { get; }
+        public ICommand ShowProductosViewModel { get; }
+        public ICommand ShowClientesViewModel { get; }
+        public ICommand ShowStockViewModel { get; }
+        public ICommand ShowFacturasViewModel { get; }
+        public ICommand ShowReporteViewModel { get; }
+        public ICommand ShowFinanzasViewModel { get; }
+
+
+        public MainViewModel()
+        {
+            //iniciacion comando
+            ShowHomeViewCommand = new ViewModelCommand(ExecuteShowHomeViewCommand);
+            ShowVentasViewCommand = new ViewModelCommand(ExecuteShowVentasViewCommand);
+            ShowProvedoresViewCommand = new ViewModelCommand(ExecuteShowProvedoresViewCommand);
+            ShowProductosViewModel = new ViewModelCommand(ExecuteShowProductosViewModel);
+            ShowClientesViewModel = new ViewModelCommand(ExecuteShowClientesViewModel);
+            ShowStockViewModel = new ViewModelCommand(ExecuteShowStockViewModel);
+            ShowFacturasViewModel = new ViewModelCommand(ExecuteShowFacturasViewModel);
+            ShowReporteViewModel = new ViewModelCommand(ExecuteShowReporteViewModel);
+            ShowFinanzasViewModel = new ViewModelCommand(ExecuteShowFinanzasViewModel);
+
+
+
+
+            //Vistas por defecto
+            ExecuteShowHomeViewCommand(null);
+
+        }
+
+        private void ExecuteShowFinanzasViewModel(object obj)
+        {
+            CurrentChildView = new FinanzasViewModel();
+            Caption = "Finanzas";
+            Icon = IconChar.SackDollar;
+        }
+
+        private void ExecuteShowReporteViewModel(object obj)
+        {
+            CurrentChildView = new ReportesViewModel();
+            Caption = "Reportes";
+            Icon = IconChar.FileContract;
+        }
+
+        private void ExecuteShowFacturasViewModel(object obj)
+        {
+
+        }
+
+        private void ExecuteShowStockViewModel(object obj)
+        {
+            CurrentChildView = new StockViewModel();
+            Caption = "Stock";
+            Icon = IconChar.BoxesStacked;
+        }
+
+        private void ExecuteShowClientesViewModel(object obj)
+        {
+            CurrentChildView = new ClientesViewModel();
+            Caption = "Clientes";
+            Icon = IconChar.Users;
+        }
+
+        private void ExecuteShowProductosViewModel(object obj)
+        {
+
+        }
+
+        private void ExecuteShowProvedoresViewCommand(object obj)
+        {
+
+        }
+
+        private void ExecuteShowVentasViewCommand(object obj)
+        {
+
+        }
+
+        private void ExecuteShowHomeViewCommand(object obj)
+        {
+
+        }
+    }
+
+
+
+
+}

@@ -1,7 +1,6 @@
 ﻿using System.Windows; // For Window, Application, RoutedEventArgs
-using System.Windows.Input; // For MouseButtonEventArgs
 using System.Windows.Controls; // Crucial for PasswordBox
-using System.Security; // Important for SecureString handling
+using System.Windows.Input; // For MouseButtonEventArgs
 using VentaPro.VistaModelo; // Assuming your ViewModel is in this namespace
 
 namespace VentaPro.View
