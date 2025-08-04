@@ -316,6 +316,11 @@ namespace VentaPro.Repositories
             return ventas;
         }
 
+        ////funcion comprobantes
+        public comprobantes()
+        {
+            return false;
+}
 
 
     }
