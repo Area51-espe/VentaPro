@@ -135,6 +135,10 @@ namespace VentaPro.Repositories
             }
             return stock;
         }
+        public validarStock()
+        {
+            return false;
+        }
 
     }
 }
