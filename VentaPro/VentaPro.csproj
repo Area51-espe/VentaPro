@@ -107,6 +107,7 @@
     <Compile Include="Repositories\StockRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\VentaRepository.cs" />
+    <Compile Include="Utils\CedulaValidator.cs" />
     <Compile Include="View\AgregarClienteView.xaml.cs">
       <DependentUpon>AgregarClienteView.xaml</DependentUpon>
     </Compile>
