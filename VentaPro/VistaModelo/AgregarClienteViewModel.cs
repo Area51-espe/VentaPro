@@ -3,15 +3,24 @@ using System.Windows;
 using System.Windows.Input;
 using VentaPro.Models;
 using VentaPro.Repositories;
+using VentaPro.Utils;
 
 namespace VentaPro.VistaModelo
 {
+
+
     public class AgregarClienteViewModel : ViewModelBase
     {
         private readonly IClienteRepository _clienteRepository;
         public ClienteModel Cliente { get; set; }
         public ICommand GuardarClienteCommand { get; }
         public ICommand CerrarVentanaCommand { get; }
+
+
+
+
+
+
 
         // Constructor para nuevo cliente
         public AgregarClienteViewModel()
@@ -28,44 +37,29 @@ namespace VentaPro.VistaModelo
             Cliente = clienteExistente;
         }
 
-        private bool ValidarCampos()
-        {
-            if (string.IsNullOrWhiteSpace(Cliente.Nombre))
-            {
-                MessageBox.Show("El nombre es obligatorio.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-            if (string.IsNullOrWhiteSpace(Cliente.Cedula))
-            {
-                MessageBox.Show("La cédula es obligatoria.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-            // Validación: la cédula solo puede tener hasta 10 dígitos
-            if (Cliente.Cedula.Trim().Length > 10)
-            {
-                MessageBox.Show("La cédula solo puede tener hasta 10 dígitos.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-            // Opcional: Verificar que la cédula contenga solo dígitos (si es requerido)
-            if (!Cliente.Cedula.Trim().All(char.IsDigit))
-            {
-                MessageBox.Show("La cédula debe contener solo dígitos.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return false;
-            }
-            // Agrega aquí otras validaciones necesarias (teléfono, email, etc.)
-            return true;
-        }
+      
 
 
         private void GuardarCliente(object obj)
         {
-            if (!ValidarCampos())
+            //if (!ValidarCampos())
+            // return;
+
+            if (!Validarcedula())
                 return;
+
+
+
 
             // Normalizamos los valores
             string nombre = Cliente.Nombre?.Trim();
             string cedula = Cliente.Cedula?.Trim();
+         
+            string telefono = Cliente.Telefono.Trim();
 
+            
+
+           
             if (Cliente.Id == 0)
             {
                 // Validación para nuevo cliente
@@ -108,5 +102,44 @@ namespace VentaPro.VistaModelo
             Window ventana = obj as Window;
             ventana?.Close();
         }
+
+
+
+        ///funcion validad
+        ///
+
+        private bool Validarcedula()
+        {
+            if (string.IsNullOrWhiteSpace(Cliente.Nombre))
+            {
+                MessageBox.Show("El nombre es obligatorio.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(Cliente.Telefono))
+            {
+                MessageBox.Show("Telefono Requerido.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+
+
+            if (string.IsNullOrWhiteSpace(Cliente.Cedula))
+            {
+                MessageBox.Show("La cédula es obligatoria.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            if (!Cliente.Cedula.Trim().All(char.IsDigit))
+            {
+                MessageBox.Show("La cédula debe contener solo dígitos.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            if (!CedulaValidator.EsCedulaValida(Cliente.Cedula.Trim()))
+            {
+                MessageBox.Show("La cédula ingresada no es válida.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return false;
+            }
+            return true;
+        }
+
+
     }
 }
