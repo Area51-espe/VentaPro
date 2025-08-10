@@ -29,7 +29,11 @@
         <DataTemplate DataType="{x:Type vm:HomeViewModel}">
             <local:HomeView/>
         </DataTemplate>
-       
+
+        <DataTemplate DataType="{x:Type vm:VentasViewModel}">
+            <local:VentasView/>
+        </DataTemplate>
+
         <DataTemplate DataType="{x:Type vm:ProveedoresViewModel}">
             <local:ProvedoresView/>
         </DataTemplate>
@@ -202,7 +206,7 @@
                         <RadioButton Style="{StaticResource menuButton}"
                                      Tag="{StaticResource color5}"
                                      IsChecked="True"
-                                     Command="{Binding ShowStockViewModel}">
+                                     Command="{Binding ShowStockViewModel}" Checked="RadioButton_Checked">
                             <StackPanel Orientation="Horizontal">
                                 <fa:IconImage Icon="BoxesStacked"
                                               Style="{StaticResource menuButtonIcon}"
