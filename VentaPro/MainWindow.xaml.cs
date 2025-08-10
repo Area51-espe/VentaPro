@@ -78,5 +78,9 @@ namespace VentaPro
             MenuColumn.BeginAnimation(ColumnDefinition.WidthProperty, widthAnimation);
         }
 
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
