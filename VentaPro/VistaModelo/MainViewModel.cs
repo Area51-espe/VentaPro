@@ -68,7 +68,9 @@ namespace VentaPro.VistaModelo
 
         private void ExecuteShowFacturasViewModel(object obj)
         {
-
+            CurrentChildView = new CompraViewModel();
+            Caption = "Compras";
+            Icon = IconChar.FileInvoiceDollar;
         }
 
         private void ExecuteShowStockViewModel(object obj)
@@ -87,22 +89,31 @@ namespace VentaPro.VistaModelo
 
         private void ExecuteShowProductosViewModel(object obj)
         {
-
+            CurrentChildView = new ProductosViewModel();
+            Caption = "Productos";
+            Icon = IconChar.ShoppingBag;
         }
 
         private void ExecuteShowProvedoresViewCommand(object obj)
         {
-
+            CurrentChildView = new ProveedoresViewModel();
+            Caption = "Provedores";
+            Icon = IconChar.TruckFast;
         }
 
         private void ExecuteShowVentasViewCommand(object obj)
         {
+            CurrentChildView = new VentasViewModel();
+            Caption = "Ventas";
+            Icon = IconChar.MoneyBillWave;
 
         }
 
         private void ExecuteShowHomeViewCommand(object obj)
         {
-
+            CurrentChildView = new HomeViewModel();
+            Caption = "Home";
+            Icon = IconChar.Home;
         }
     }
 
