@@ -102,7 +102,7 @@
                 </Grid.RowDefinitions>
 
                 <!-- #region Título -->
-                <TextBlock Text="Gestión de Compras" 
+                <TextBlock Text="Gestión de Compras al Por Mayor" 
                            Grid.Row="0"
                            HorizontalAlignment="Center"
                            FontSize="28"

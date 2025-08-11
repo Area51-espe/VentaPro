@@ -130,28 +130,33 @@
                     <!-- #region Resumen de Totales -->
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
                         <StackPanel Margin="10">
-                            <TextBlock Text="Inventario:" FontWeight="Bold" FontStyle="Oblique" FontSize="16" Foreground="White" />
+                            <TextBlock Text="Valor en Stock:" FontWeight="Bold" FontStyle="Oblique" FontSize="16" Foreground="White" />
                             <TextBlock Text="{Binding ValorInventario, StringFormat={}{0:C}}" 
                                        FontSize="18" Foreground="White"/>
                         </StackPanel>
                         <StackPanel Margin="10">
-                            <TextBlock Text="Ingresos:" FontWeight="Bold" FontStyle="Oblique" FontSize="16" Foreground="White"/>
+                            <TextBlock Text="Ingresos bruto:" FontWeight="Bold" FontStyle="Oblique" FontSize="16" Foreground="White"/>
                             <TextBlock Text="{Binding VentasTotales, StringFormat={}{0:C}}" 
                                        FontSize="18" Foreground="White"/>
                         </StackPanel>
                         <StackPanel Margin="10">
-                            <TextBlock Text="Egresos:" FontWeight="Bold" FontStyle="Oblique" FontSize="16" Foreground="White"/>
+                            <TextBlock Text="Inversion inicial:" FontWeight="Bold" FontStyle="Oblique" FontSize="16" Foreground="White"/>
                             <TextBlock Text="{Binding EgresosTotales, StringFormat={}{0:C}}" 
                                        FontSize="18" Foreground="White"/>
                         </StackPanel>
                         <StackPanel Margin="10">
-                            <TextBlock Text="Ganancia:" FontWeight="Bold" FontStyle="Oblique" FontSize="16" Foreground="White"/>
+                            <TextBlock Text="Inversión restante:" FontWeight="Bold" FontStyle="Oblique" FontSize="16" Foreground="White"/>
                             <TextBlock Text="{Binding GananciaBruta, StringFormat={}{0:C}}" 
                                        FontSize="18" Foreground="White"/>
                         </StackPanel>
                     </StackPanel>
                     <!-- #endregion -->
 
+                   
+                    
+                    
+                    
+                    
                     <!-- #region Detalle de Ingresos -->
                     <TextBlock Text="Detalle de Ingresos:" 
                                FontWeight="Bold" FontStyle="Oblique" FontSize="16" 
