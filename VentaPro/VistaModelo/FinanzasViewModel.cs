@@ -21,8 +21,15 @@ namespace VentaPro.VistaModelo
         // Diccionario para almacenar errores de validación
         private readonly Dictionary<string, List<string>> _errores = new Dictionary<string, List<string>>();
 
+
+
+
+
         public FinanzasViewModel()
         {
+
+
+
             // Inicializamos los repositorios
             ventaRepository = new VentaRepository();
             compraRepository = new CompraRepository();
@@ -322,4 +329,7 @@ namespace VentaPro.VistaModelo
         public string Descripcion { get; set; }
         public decimal Monto { get; set; }
     }
+
+
+
 }
