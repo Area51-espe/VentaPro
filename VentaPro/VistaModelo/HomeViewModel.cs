@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
 using VentaPro.Models;
 using VentaPro.Repositories;
 
@@ -19,11 +20,11 @@ namespace VentaPro.VistaModelo
             set { _totalClientes = value; OnPropertyChanged(nameof(TotalClientes)); }
         }
 
-        private decimal _ventasHoy;
-        public decimal VentasHoy
+        private decimal _ventasDia;
+        public decimal VentasDia
         {
-            get => _ventasHoy;
-            set { _ventasHoy = value; OnPropertyChanged(nameof(VentasHoy)); }
+            get => _ventasDia;
+            set { _ventasDia = value; OnPropertyChanged(nameof(VentasDia)); }
         }
 
         private decimal _ingresosMensuales;
@@ -54,16 +55,63 @@ namespace VentaPro.VistaModelo
             set { _ultimaVentaCliente = value; OnPropertyChanged(nameof(UltimaVentaCliente)); }
         }
 
+        private DateTime _fechaSeleccionada;
+        public DateTime FechaSeleccionada
+        {
+            get => _fechaSeleccionada;
+            set
+            {
+                _fechaSeleccionada = value;
+                OnPropertyChanged(nameof(FechaSeleccionada));
+                ConsultarVentasDia(); // Actualizar ventas cuando cambie la fecha
+                ConsultarNotificacionVenta(); // Actualizar notificaciones
+            }
+        }
+
+        private string _textoFechaSeleccionada;
+        public string TextoFechaSeleccionada
+        {
+            get => _textoFechaSeleccionada;
+            set { _textoFechaSeleccionada = value; OnPropertyChanged(nameof(TextoFechaSeleccionada)); }
+        }
+
+        public ICommand ActualizarFechaCommand { get; }
 
         public HomeViewModel()
         {
             _clienteRepository = new ClienteRepository();
             _ventaRepository = new VentaRepository();
 
+            // Inicializar la fecha seleccionada con la fecha actual
+            _fechaSeleccionada = DateTime.Today;
+            ActualizarTextoFecha();
+
+            ActualizarFechaCommand = new RelayCommand(ActualizarFecha);
+
             CargarClientes();
-            ConsultarVentasHoy();
+            ConsultarVentasDia();
             ConsultarIngresosMensuales();
             ConsultarNotificacionVenta();
+        }
+
+        private void ActualizarTextoFecha()
+        {
+            if (FechaSeleccionada.Date == DateTime.Today)
+            {
+                TextoFechaSeleccionada = "Ventas de Hoy";
+            }
+            else
+            {
+                TextoFechaSeleccionada = $"Ventas del {FechaSeleccionada:dd/MM/yyyy}";
+            }
+        }
+
+        private void ActualizarFecha(object parameter)
+        {
+            // Este método se puede usar si necesitas forzar una actualización
+            ConsultarVentasDia();
+            ConsultarNotificacionVenta();
+            ActualizarTextoFecha();
         }
 
         private void CargarClientes()
@@ -72,17 +120,17 @@ namespace VentaPro.VistaModelo
             TotalClientes = clientes.Count();
         }
 
-        private void ConsultarVentasHoy()
+        private void ConsultarVentasDia()
         {
             try
             {
-                DateTime hoy = DateTime.Today;
-                var ventasHoy = _ventaRepository.GetReportes(hoy, hoy);
-                VentasHoy = ventasHoy.Sum(v => v.Total);
+                var ventasDia = _ventaRepository.GetReportes(FechaSeleccionada, FechaSeleccionada);
+                VentasDia = ventasDia.Sum(v => v.Total);
+                ActualizarTextoFecha();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al consultar ventas de hoy: " + ex.Message);
+                MessageBox.Show("Error al consultar ventas del día: " + ex.Message);
             }
         }
 
@@ -103,13 +151,12 @@ namespace VentaPro.VistaModelo
 
         private void ConsultarNotificacionVenta()
         {
-            DateTime hoy = DateTime.Today;
-            var ventasHoy = _ventaRepository.GetReportes(hoy, hoy)
+            var ventasDia = _ventaRepository.GetReportes(FechaSeleccionada, FechaSeleccionada)
                                             .OrderByDescending(v => v.FechaVenta)
                                             .ToList();
-            if (ventasHoy.Any())
+            if (ventasDia.Any())
             {
-                var ultimaVenta = ventasHoy.First();
+                var ultimaVenta = ventasDia.First();
                 if (ultimaVenta.ClienteId.HasValue)
                 {
                     var cliente = _clienteRepository.GetById(ultimaVenta.ClienteId.Value);
@@ -137,8 +184,28 @@ namespace VentaPro.VistaModelo
                 UltimaVentaCliente = "";
             }
         }
+    }
 
+    // Clase auxiliar para el comando
+    public class RelayCommand : ICommand
+    {
+        private readonly Action<object> _execute;
+        private readonly Predicate<object> _canExecute;
 
+        public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
+        {
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
+        }
 
+        public bool CanExecute(object parameter) => _canExecute?.Invoke(parameter) ?? true;
+
+        public void Execute(object parameter) => _execute(parameter);
+
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
     }
 }

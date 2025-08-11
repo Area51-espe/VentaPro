@@ -21,8 +21,15 @@ namespace VentaPro.VistaModelo
         // Diccionario para almacenar errores de validación
         private readonly Dictionary<string, List<string>> _errores = new Dictionary<string, List<string>>();
 
+
+
+
+
         public FinanzasViewModel()
         {
+
+
+
             // Inicializamos los repositorios
             ventaRepository = new VentaRepository();
             compraRepository = new CompraRepository();
@@ -242,6 +249,52 @@ namespace VentaPro.VistaModelo
                 }
             }
         }
+
+
+
+
+        //comienzo
+
+        private decimal _gananciaSinIVA;
+        public decimal GananciaSinIVA
+        {
+            get => _gananciaSinIVA;
+            set
+            {
+                if (_gananciaSinIVA != value)
+                {
+                    _gananciaSinIVA = value;
+                    OnPropertyChanged(nameof(GananciaSinIVA));
+                }
+            }
+        }
+
+        private decimal _recaudacionIVA;
+        public decimal RecaudacionIVA
+        {
+            get => _recaudacionIVA;
+            set
+            {
+                if (_recaudacionIVA != value)
+                {
+                    _recaudacionIVA = value;
+                    OnPropertyChanged(nameof(RecaudacionIVA));
+                }
+            }
+        }
+
+
+        //fin
+
+
+
+
+
+
+
+
+
+
         #endregion
 
         #region Colecciones de Movimientos Financieros
@@ -303,6 +356,11 @@ namespace VentaPro.VistaModelo
             VentasTotales = Ingresos.Sum(i => i.Monto);
             EgresosTotales = Egresos.Sum(e => e.Monto);
             GananciaBruta = VentasTotales - EgresosTotales;
+
+            ///funcion
+            CalcularGananciaSinIVA_Y_RecaudacionIVA();
+
+
         }
 
         private void ConsultarFinanzas(object parameter)
@@ -313,6 +371,51 @@ namespace VentaPro.VistaModelo
                 CalcularResumen();
             }
         }
+
+
+        private void CalcularGananciaSinIVA_Y_RecaudacionIVA()
+        {
+            /*
+
+            VentasTotales = Ingresos.Sum(i => i.Monto);
+            EgresosTotales = Egresos.Sum(e => e.Monto);
+            GananciaBruta = VentasTotales - EgresosTotales;
+            */
+
+            // Aplicamos tus fórmulas literalmente
+            decimal inversionrestante = (Egresos.Sum(e => e.Monto)) - (Ingresos.Sum(i => i.Monto));//23.01
+
+            decimal stock = stockRepository.GetAll().Sum(s => s.ValorTotal); 
+
+            decimal ingresobruto = Ingresos.Sum(i => i.Monto);
+
+
+
+            decimal ganaciaiva = stock-inversionrestante ;
+            
+
+            decimal ganaciasiniva = ingresobruto-ganaciaiva ;
+            decimal recuadacioniva = ganaciaiva-ganaciasiniva;
+            // Asignamos a las propiedades del ViewModel
+
+
+            GananciaSinIVA = ganaciasiniva;
+            RecaudacionIVA = recuadacioniva;
+
+           // GananciaSinIVA = stockRepository.GetAll().Sum(s => s.ValorTotal);
+            //GananciaSinIVA = Ingresos.Sum(i => i.Monto);/// ingreso bruto
+           // RecaudacionIVA = Egresos.Sum(e => e.Monto);///inversion 
+
+        }
+
+
+
+
+
+
+
+
+
         #endregion
     }
 
@@ -322,4 +425,7 @@ namespace VentaPro.VistaModelo
         public string Descripcion { get; set; }
         public decimal Monto { get; set; }
     }
+
+
+
 }
