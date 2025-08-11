@@ -2,7 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression.blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:VentaPro.View"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
@@ -13,7 +13,6 @@
         <!-- Estilo Moderno para Bordes/Tarjetas -->
         <Style x:Key="ModernCardStyle" TargetType="Border">
             <Setter Property="Background" Value="#34495e"/>
-           
             <Setter Property="Padding" Value="15"/>
             <Setter Property="CornerRadius" Value="8"/>
             <Setter Property="Margin" Value="5"/>
@@ -58,6 +57,17 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+
+        <!-- Estilo para DatePicker -->
+        <Style x:Key="ModernDatePickerStyle" TargetType="DatePicker">
+            <Setter Property="Background" Value="#2c3e50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#34495e"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
     </UserControl.Resources>
     <!-- #endregion -->
@@ -111,8 +121,24 @@
                                            Foreground="White"/>
                             </StackPanel>
 
+                            <!-- Selector de fecha para ventas diarias -->
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                                <fa:IconImage Icon="Calendar" 
+                                              Height="16" Width="16" 
+                                              Margin="0,0,8,0" 
+                                              Foreground="White" 
+                                              VerticalAlignment="Center"/>
+                                <TextBlock Text="Seleccionar fecha:" 
+                                           Foreground="White" 
+                                           VerticalAlignment="Center"
+                                           Margin="0,0,10,0"/>
+                                <DatePicker SelectedDate="{Binding FechaSeleccionada, Mode=TwoWay}"
+                                           Style="{StaticResource ModernDatePickerStyle}"
+                                           Width="150"/>
+                            </StackPanel>
+
                             <StackPanel Orientation="Horizontal" Margin="0,10">
-                                <!-- Tarjeta Ventas Hoy -->
+                                <!-- Tarjeta Ventas del Día Seleccionado -->
                                 <Border Style="{StaticResource ModernCardStyle}" 
                                         Background="#28AEED" 
                                         Width="170">
@@ -122,11 +148,13 @@
                                                           Height="16" Width="16" 
                                                           Margin="0,0,5,0" 
                                                           Foreground="White"/>
-                                            <TextBlock Text="Ventas Hoy" 
+                                            <TextBlock Text="{Binding TextoFechaSeleccionada}" 
                                                        Foreground="White" 
-                                                       VerticalAlignment="Center"/>
+                                                       VerticalAlignment="Center"
+                                                       FontSize="11"
+                                                       TextWrapping="Wrap"/>
                                         </StackPanel>
-                                        <TextBlock Text="{Binding VentasHoy, StringFormat=C}"
+                                        <TextBlock Text="{Binding VentasDia, StringFormat=C}"
                                                    Foreground="White" 
                                                    FontSize="20" 
                                                    FontWeight="Bold"/>
@@ -213,8 +241,10 @@
                                                      Height="14" Width="14" 
                                                      Margin="0,0,8,0" 
                                                      Foreground="#4CAF50"/>
-                                        <TextBlock Text= "{Binding UltimaVentaMonto, StringFormat='Nueva venta realizada por: {0:C}'}"
-                                                   TextWrapping="Wrap" Foreground="White"/>
+                                        <TextBlock TextWrapping="Wrap" Foreground="White">
+                                            <Run Text="Última venta: "/>
+                                            <Run Text="{Binding UltimaVentaMonto, StringFormat=C}"/>
+                                        </TextBlock>
                                     </StackPanel>
                                 </ListBoxItem>
                                 <ListBoxItem>
@@ -223,8 +253,10 @@
                                                      Height="14" Width="14" 
                                                      Margin="0,0,8,0" 
                                                      Foreground="#FF5722"/>
-                                        <TextBlock Text="{Binding UltimaVentaCliente, StringFormat='Nueva venta realizada a: {0}'}"
-                                                   TextWrapping="Wrap" Foreground="White"/>
+                                        <TextBlock TextWrapping="Wrap" Foreground="White">
+                                            <Run Text="Cliente: "/>
+                                            <Run Text="{Binding UltimaVentaCliente}"/>
+                                        </TextBlock>
                                     </StackPanel>
                                 </ListBoxItem>
                                 <ListBoxItem>

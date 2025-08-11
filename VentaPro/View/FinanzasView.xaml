@@ -128,6 +128,7 @@
                     <!-- #endregion -->
 
                     <!-- #region Resumen de Totales -->
+                    
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
                         <StackPanel Margin="10">
                             <TextBlock Text="Valor en Stock:" FontWeight="Bold" FontStyle="Oblique" FontSize="16" Foreground="White" />
@@ -140,16 +141,35 @@
                                        FontSize="18" Foreground="White"/>
                         </StackPanel>
                         <StackPanel Margin="10">
-                            <TextBlock Text="Inversion inicial:" FontWeight="Bold" FontStyle="Oblique" FontSize="16" Foreground="White"/>
+                            <TextBlock Text="Egresos:" FontWeight="Bold" FontStyle="Oblique" FontSize="16" Foreground="White"/>
                             <TextBlock Text="{Binding EgresosTotales, StringFormat={}{0:C}}" 
                                        FontSize="18" Foreground="White"/>
                         </StackPanel>
                         <StackPanel Margin="10">
-                            <TextBlock Text="Inversión restante:" FontWeight="Bold" FontStyle="Oblique" FontSize="16" Foreground="White"/>
+                            <TextBlock Text="Restante:" FontWeight="Bold" FontStyle="Oblique" FontSize="16" Foreground="White"/>
                             <TextBlock Text="{Binding GananciaBruta, StringFormat={}{0:C}}" 
                                        FontSize="18" Foreground="White"/>
                         </StackPanel>
+                        
+                        
+                        
+                        
+                        
+
                     </StackPanel>
+                    <StackPanel>
+                        <StackPanel Margin="10">
+                            <TextBlock Text="Ganancia sin IVA:" FontWeight="Bold" FontStyle="Oblique" FontSize="16" Foreground="White"/>
+                            <TextBlock Text="{Binding GananciaSinIVA, StringFormat={}{0:C}}" 
+                   FontSize="18" Foreground="White"/>
+                        </StackPanel>
+                        <StackPanel Margin="10">
+                            <TextBlock Text="Recaudación de IVA:" FontWeight="Bold" FontStyle="Oblique" FontSize="16" Foreground="White"/>
+                            <TextBlock Text="{Binding RecaudacionIVA, StringFormat={}{0:C}}" 
+                   FontSize="18" Foreground="White"/>
+                        </StackPanel>
+                    </StackPanel>
+                    
                     <!-- #endregion -->
 
                    
