@@ -41,6 +41,16 @@ namespace VentaPro.VistaModelo
         private List<ProductoModel> _allProductos; // Lista completa de productos
         #endregion
 
+
+        public interface IMessageService
+        {
+            void Show(string message);
+            bool Confirm(string message);
+        }
+
+
+
+
         #region Constructor
         public VentasViewModel()
         {
